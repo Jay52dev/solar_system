@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,1082 +9,30 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-
-    body {
-      background-color: #0a0e23;
-      color: #fff;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    /* Updated Navigation Bar Styling */
-    header {
-      background-color: rgba(10, 14, 35, 0.95);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0, 174, 255, 0.2);
-      transition: all 0.4s ease;
-    }
-
-    header:hover {
-      background-color: rgba(10, 14, 35, 0.98);
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #ffaa00;
-      text-shadow: 0 0 15px rgba(255, 170, 0, 0.5);
-      transition: all 0.3s ease;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .logo::before {
-      content: "🪐";
-      margin-right: 10px;
-      font-size: 1.8rem;
-      animation: rotatePlanet 8s linear infinite;
-      display: inline-block;
-    }
-
-    @keyframes rotatePlanet {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
-      text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      position: relative;
-      padding: 0.5rem 0;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #00aeff, #ffaa00);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #ffaa00;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .navbar-toggler {
-      border: none;
-      background: transparent;
-      color: #fff;
-    }
-
-    .navbar-toggler:focus {
-      box-shadow: none;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .solar-system-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .sun {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, #ff9500, #ff5100);
-      border-radius: 50%;
-      box-shadow: 0 0 50px #ff5100, 0 0 100px #ff9500;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      animation: pulseSun 4s infinite alternate;
-    }
-
-    @keyframes pulseSun {
-      from {
-        box-shadow: 0 0 50px #ff5100, 0 0 100px #ff9500;
-      }
-
-      to {
-        box-shadow: 0 0 80px #ff5100, 0 0 150px #ff9500;
-      }
-    }
-
-    .orbit {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .planet {
-      position: absolute;
-      border-radius: 50%;
-      transform-origin: 50% 50%;
-    }
-
-    @keyframes orbit {
-      from {
-        transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-      }
-    }
-
-    /* PLANET STYLES */
-    #mercury {
-      --orbit-radius: 100px;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle, #bbb, #888);
-      animation: orbit 6s linear infinite;
-    }
-
-    #venus {
-      --orbit-radius: 140px;
-      width: 25px;
-      height: 25px;
-      background: radial-gradient(circle, #f3cc79, #d28e2c);
-      animation: orbit 8s linear infinite;
-    }
-
-    #earth {
-      --orbit-radius: 190px;
-      width: 28px;
-      height: 28px;
-      background: radial-gradient(circle, #1f87ff, #0c3c78);
-      animation: orbit 10s linear infinite;
-    }
-
-    #mars {
-      --orbit-radius: 240px;
-      width: 24px;
-      height: 24px;
-      background: radial-gradient(circle, #d14d1f, #9e1c00);
-      animation: orbit 12s linear infinite;
-    }
-
-    #jupiter {
-      --orbit-radius: 300px;
-      width: 55px;
-      height: 55px;
-      background: radial-gradient(circle, #e3b279, #a96c27);
-      animation: orbit 16s linear infinite;
-    }
-
-    #saturn {
-      --orbit-radius: 370px;
-      width: 50px;
-      height: 50px;
-      background: radial-gradient(circle, #f6e4b2, #a98c4c);
-      animation: orbit 20s linear infinite;
-    }
-
-    #saturn::before {
-      content: '';
-      position: absolute;
-      width: 80px;
-      height: 12px;
-      background: rgba(245, 222, 179, 0.7);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(30deg);
-      z-index: -1;
-    }
-
-    #uranus {
-      --orbit-radius: 430px;
-      width: 38px;
-      height: 38px;
-      background: radial-gradient(circle, #7fd5e8, #3589a0);
-      animation: orbit 25s linear infinite;
-    }
-
-    #neptune {
-      --orbit-radius: 500px;
-      width: 36px;
-      height: 36px;
-      background: radial-gradient(circle, #3956db, #232e87);
-      animation: orbit 30s linear infinite;
-    }
-
-    /* Orbit outlines */
-    .mercury-orbit {
-      width: 200px;
-      height: 200px;
-    }
-
-    .venus-orbit {
-      width: 280px;
-      height: 280px;
-    }
-
-    .earth-orbit {
-      width: 380px;
-      height: 380px;
-    }
-
-    .mars-orbit {
-      width: 480px;
-      height: 480px;
-    }
-
-    .jupiter-orbit {
-      width: 600px;
-      height: 600px;
-    }
-
-    .saturn-orbit {
-      width: 740px;
-      height: 740px;
-    }
-
-    .uranus-orbit {
-      width: 860px;
-      height: 860px;
-    }
-
-    .neptune-orbit {
-      width: 1000px;
-      height: 1000px;
-    }
-
-    /* Stars background */
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-    }
-
-    .star {
-      position: absolute;
-      background-color: #fff;
-      border-radius: 50%;
-      animation: twinkle 5s infinite;
-    }
-
-    @keyframes twinkle {
-
-      0%,
-      100% {
-        opacity: 0.3;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-    .hero-content {
-      z-index: 2;
-      max-width: 800px;
-      padding: 2rem;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      transform: translateY(0);
-      animation: fadeIn 1.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px rgba(0, 174, 255, 0.7);
-      background: linear-gradient(90deg, #ffaa00, #00aeff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background: linear-gradient(45deg, #00aeff, #a64dff);
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.7s;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 174, 255, 0.5);
-    }
-
-    .btn:hover::before {
-      left: 100%;
-    }
-
-    /* Updated Responsive Planets Section */
-    .planets-section {
-      padding: 5rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #ffaa00;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, #00aeff, #ffaa00);
-    }
-
-    .planets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .planet-card {
-      background: rgba(28, 28, 45, 0.8);
-      border-radius: 16px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .planet-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(255, 170, 0, 0.3);
-    }
-
-    .planet-img-container {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .planet-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .planet-card:hover .planet-img {
-      transform: scale(1.1);
-    }
-
-    .planet-content {
-      padding: 20px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .planet-title {
-      font-size: 1.5rem;
-      color: #ffaa00;
-      margin-bottom: 10px;
-    }
-
-    .planet-info {
-      margin: 10px 0 15px;
-      font-size: 0.95rem;
-      flex-grow: 1;
-    }
-
-    .planet-stats {
-      list-style: none;
-      padding: 0;
-      margin-top: auto;
-    }
-
-    .planet-stats li {
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: baseline;
-    }
-
-    .planet-stats li strong {
-      color: #00aeff;
-      margin-right: 5px;
-      min-width: 85px;
-    }
-
-    /* Galaxies Section */
-    .galaxies-section {
-      padding: 5rem 1rem;
-      background: linear-gradient(180deg, #0a0e23, #0d1330);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .galaxies-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('/api/placeholder/1200/800') center/cover no-repeat;
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .galaxies-container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .galaxies-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
-    }
-
-    .galaxy-card {
-      background: rgba(20, 20, 40, 0.7);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      backdrop-filter: blur(8px);
-    }
-
-    .galaxy-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 15px 35px rgba(0, 174, 255, 0.3);
-    }
-
-    .galaxy-img-container {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .galaxy-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    .galaxy-card:hover .galaxy-img {
-      transform: scale(1.1);
-    }
-
-    .galaxy-content {
-      padding: 25px;
-    }
-
-    .galaxy-title {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #ffaa00;
-    }
-
-    .galaxy-description {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ddd;
-      margin-bottom: 20px;
-    }
-
-    .galaxy-facts {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 15px;
-    }
-
-    .galaxy-facts li {
-      margin-bottom: 8px;
-      display: flex;
-      align-items: baseline;
-    }
-
-    .galaxy-facts strong {
-      color: #00aeff;
-      margin-right: 5px;
-      min-width: 100px;
-    }
-    /* Space Facts Section */
-    .space-facts-section {
-      padding: 5rem 1rem;
-      background: linear-gradient(45deg, #0a0e23, #151d3b);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .space-facts-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, transparent, rgba(0, 0, 0, 0.8)),
-        url('/api/placeholder/1200/800') center/cover no-repeat;
-      opacity: 0.15;
-      z-index: 0;
-    }
-
-    .space-facts-container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .facts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-
-    .fact-card {
-      background: rgba(30, 35, 60, 0.7);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      border-left: 4px solid #00aeff;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .fact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 174, 255, 0.2);
-      border-left-color: #ffaa00;
-    }
-
-    .fact-number {
-      font-size: 2rem;
-      font-weight: bold;
-      color: rgba(255, 170, 0, 0.3);
-      margin-bottom: 15px;
-    }
-
-    .fact-title {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: #ffaa00;
-    }
-
-    .fact-description {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ddd;
-    }
-
-    /* New Contact Section */
-    .contact-section {
-      background: linear-gradient(180deg, #0a0e23, #111633);
-      padding: 80px 20px;
-      color: #fff;
-      position: relative;
-    }
-
-    .contact-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('/api/placeholder/1200/800') center/cover no-repeat;
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .contact-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #ffaa00;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-title::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, #00aeff, #ffaa00);
-    }
-
-    .contact-container {
-      max-width: 800px;
-      margin: auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      background: rgba(28, 28, 45, 0.8);
-      padding: 30px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-group label {
-      font-size: 1rem;
-      color: #ffaa00;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      padding: 12px 15px;
-      background: rgba(31, 31, 46, 0.8);
-      border: 1px solid #333;
-      color: #fff;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: #00aeff;
-      box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
-    }
-
-    .contact-form textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      padding: 14px;
-      border: none;
-      background: linear-gradient(45deg, #00aeff, #a64dff);
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      margin-top: 10px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-form button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.7s;
-    }
-
-    .contact-form button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 174, 255, 0.5);
-    }
-
-    .contact-form button:hover::before {
-      left: 100%;
-    }
-
-    /* Footer Styling */
-    .solar-footer {
-      background: linear-gradient(135deg, #0a0f2c, #111633);
-      color: #fff;
-      padding: 60px 20px 20px;
-      font-family: 'Segoe UI', sans-serif;
-      border-top: 3px solid #ffaa00;
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .footer-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #ffaa00;
-    }
-
-    .footer-section p,
-    .footer-section li,
-    .footer-section a {
-      color: #bbb;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      transition: color 0.3s ease;
-    }
-
-    .footer-section a:hover {
-      color: #ffaa00;
-      text-decoration: underline;
-    }
-
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .footer-section li {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .footer-section i {
-      margin-right: 10px;
-      color: #ffaa00;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      margin-right: 15px;
-      font-size: 1.3rem;
-      color: #fff;
-      transition: transform 0.3s, color 0.3s;
-    }
-
-    .social-icons a:hover {
-      color: #ffaa00;
-      transform: scale(1.2);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 40px;
-      text-align: center;
-      padding-top: 15px;
-      font-size: 0.9rem;
-      color: #888;
-    }
-    /* 2. SPACE NEWS SECTION STYLES */
-    .space-news-section {
-      padding: 5rem 1rem;
-      background: linear-gradient(135deg, #0a0e23, #13183a);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .space-news-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('/api/placeholder/1200/800') center/cover no-repeat;
-      opacity: 0.08;
-      z-index: 0;
-    }
-
-    .space-news-container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .news-card {
-      background: rgba(25, 28, 50, 0.7);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      backdrop-filter: blur(8px);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .news-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 174, 255, 0.3);
-    }
-
-    .news-img-container {
-      height: 200px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .news-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .news-card:hover .news-img-container img {
-      transform: scale(1.1);
-    }
-
-    .news-date {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: rgba(255, 170, 0, 0.9);
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .news-date .day {
-      font-size: 1.2rem;
-      line-height: 1;
-    }
-
-    .news-date .month {
-      font-size: 0.8rem;
-    }
-
-    .news-content {
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .news-title {
-      font-size: 1.3rem;
-      color: #ffaa00;
-      margin-bottom: 15px;
-      line-height: 1.4;
-    }
-
-    .news-excerpt {
-      font-size: 0.95rem;
-      color: #ddd;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .news-meta {
-      display: flex;
-      justify-content: space-between;
-      color: #aaa;
-      font-size: 0.85rem;
-      margin-bottom: 15px;
-    }
-
-    .news-meta i {
-      margin-right: 5px;
-      color: #00aeff;
-    }
-
-    .news-read-more {
-      display: inline-block;
-      color: #00aeff;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
-    }
-
-    .news-read-more i {
-      margin-left: 5px;
-      transition: transform 0.3s ease;
-    }
-
-    .news-read-more:hover {
-      color: #ffaa00;
-    }
-
-    .news-read-more:hover i {
-      transform: translateX(5px);
-    }
-
-    .news-more-container {
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .news-more-btn {
-      background: linear-gradient(45deg, #00aeff, #a64dff);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .news-more-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 174, 255, 0.5);
-    }
- </style>
+  <!-- for css styling -->
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Header & Navigation -->
   <header>
     <nav>
       <div class="logo">Solar Explorer</div>
-      <div class="nav-links">
+      <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="#planets">Planets</a>
         <a href="#galaxies">Galaxies</a>
-        <a href="#facts">Space Facts</a>
+        <a href="#news">Space News</a>
+        <a href="#facts">Fun Facts</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
   </header>
 
-  <!-- Hero Section with Solar System -->
-  <section class="hero" id="home">
+  <section class="hero">
     <div class="solar-system-container">
       <div class="sun"></div>
-
-      <!-- Orbit paths -->
       <div class="orbit mercury-orbit"></div>
       <div class="orbit venus-orbit"></div>
       <div class="orbit earth-orbit"></div>
@@ -1093,7 +42,6 @@
       <div class="orbit uranus-orbit"></div>
       <div class="orbit neptune-orbit"></div>
 
-      <!-- Planets -->
       <div class="planet" id="mercury"></div>
       <div class="planet" id="venus"></div>
       <div class="planet" id="earth"></div>
@@ -1103,176 +51,167 @@
       <div class="planet" id="uranus"></div>
       <div class="planet" id="neptune"></div>
 
-      <!-- Stars background -->
       <div class="stars"></div>
     </div>
-
     <div class="hero-content">
-      <h1>Explore Our Solar System</h1>
-      <p>Embark on a cosmic journey through our magnificent solar system. Discover fascinating facts about planets,
-        moons, and the mysteries of outer space.</p>
+      <h1>Explore Our Amazing Universe</h1>
+      <p>Discover the wonders of our solar system, distant galaxies, and the mysteries of outer space with our interactive space exploration platform.</p>
       <a href="#planets" class="btn">Start Exploring</a>
     </div>
-
   </section>
-  <!-- Planets Section -->
+
   <section class="planets-section" id="planets">
-    <h2 class="section-title">Our Solar System</h2>
+    <h2 class="section-title">Explore Our Solar System</h2>
     <div class="planets-grid">
-      <!-- sun -->
-      <a href="#planets" class="planet-card">
-        <div class="planet-img-container">
-          <img src="sun.jpeg" alt="Mercury" class="planet-img">
-        </div>
-        <div class="planet-content">
-          <h3 class="planet-title">Sun</h3>
-          <p class="planet-info">The smallest and innermost planet in our Solar System, known for its cratered surface.
-          </p>
-          <ul class="planet-stats">
-            <li><strong>temperature :</strong> 27 million °F</li>
-            <li><strong>Diameter:</strong> 1.3927 million km(Approx)</li>
-            <li><strong>Age:</strong> 4.603 billion years(Approx)</li>
-          </ul>
-        </div>
-      </a>
+            <!-- sun -->
+            <a href="#planets" class="planet-card">
+              <div class="planet-img-container">
+                <img src="sun.jpeg" alt="Mercury" class="planet-img">
+              </div>
+              <div class="planet-content">
+                <h3 class="planet-title">Sun</h3>
+                <p class="planet-info">The smallest and innermost planet in our Solar System, known for its cratered surface.
+                </p>
+                <ul class="planet-stats">
+                  <li><strong>temperature :</strong> 27 million °F</li>
+                  <li><strong>Diameter:</strong> 1.3927 million km(Approx)</li>
+                  <li><strong>Age:</strong> 4.603 billion years(Approx)</li>
+                </ul>
+              </div>
+            </a>
       <!-- Mercury -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="mercary.jpg" alt="Mercury" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Mercury</h3>
-          <p class="planet-info">The smallest and innermost planet in our Solar System, known for its cratered surface.
-          </p>
+          <p class="planet-info">The smallest and innermost planet in the Solar System, Mercury's proximity to the Sun makes it one of the hottest worlds in our celestial neighborhood.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 58 million km from Sun</li>
-            <li><strong>Diameter:</strong> 4,880 km</li>
-            <li><strong>Day length:</strong> 59 Earth days</li>
+            <li><strong>Diameter:</strong> 4,879 km</li>
+            <li><strong>Day Length:</strong> 176 Earth days</li>
+            <li><strong>Year Length:</strong> 88 Earth days</li>
           </ul>
         </div>
       </a>
 
       <!-- Venus -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="venus.jpg" alt="Venus" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Venus</h3>
-          <p class="planet-info">Known as Earth's "sister planet" due to similar size, Venus has a toxic atmosphere and
-            extreme heat.</p>
+          <p class="planet-info">Often called Earth's sister planet due to its similar size, Venus has a toxic atmosphere and is the hottest planet in our Solar System.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 108 million km from Sun</li>
             <li><strong>Diameter:</strong> 12,104 km</li>
-            <li><strong>Day length:</strong> 243 Earth days</li>
+            <li><strong>Day Length:</strong> 243 Earth days</li>
+            <li><strong>Year Length:</strong> 225 Earth days</li>
           </ul>
         </div>
       </a>
 
       <!-- Earth -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="earth.jpg" alt="Earth" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Earth</h3>
-          <p class="planet-info">Our home planet, the only known world with liquid water and life on its surface.</p>
+          <p class="planet-info">Our home planet is the only world known to harbor life. It's the third planet from the Sun and the only astronomical object known to harbor life.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 150 million km from Sun</li>
             <li><strong>Diameter:</strong> 12,742 km</li>
-            <li><strong>Day length:</strong> 24 hours</li>
+            <li><strong>Day Length:</strong> 24 hours</li>
+            <li><strong>Year Length:</strong> 365.25 days</li>
           </ul>
         </div>
       </a>
 
       <!-- Mars -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
-          <img src="https://t3.ftcdn.net/jpg/01/27/85/48/240_F_127854858_OvYgiBYMORrQY3uvPO50nWzOpI0IT1Kh.jpg"
-            alt="Mars" class="planet-img">
+          <img src="mars.jpg" alt="Mars" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Mars</h3>
-          <p class="planet-info">The "Red Planet" with polar ice caps and the largest volcano in our Solar System.</p>
+          <p class="planet-info">Known as the Red Planet, Mars is a terrestrial planet with a thin atmosphere and surface features reminiscent of the Moon's craters.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 228 million km from Sun</li>
             <li><strong>Diameter:</strong> 6,779 km</li>
-            <li><strong>Day length:</strong> 24.6 hours</li>
+            <li><strong>Day Length:</strong> 24.6 hours</li>
+            <li><strong>Year Length:</strong> 687 Earth days</li>
           </ul>
         </div>
       </a>
 
       <!-- Jupiter -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="jupiter.jpg" alt="Jupiter" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Jupiter</h3>
-          <p class="planet-info">The largest planet in our Solar System, famous for its Great Red Spot storm.</p>
+          <p class="planet-info">The largest planet in our Solar System, Jupiter is a gas giant with a stunning pattern of swirling clouds and the famous Great Red Spot.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 778 million km from Sun</li>
             <li><strong>Diameter:</strong> 139,820 km</li>
-            <li><strong>Day length:</strong> 9.93 hours</li>
+            <li><strong>Day Length:</strong> 9.93 hours</li>
+            <li><strong>Year Length:</strong> 11.86 Earth years</li>
           </ul>
         </div>
       </a>
 
       <!-- Saturn -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="saturn.jpeg" alt="Saturn" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Saturn</h3>
-          <p class="planet-info">Known for its spectacular ring system made of ice particles and rocky debris.</p>
+          <p class="planet-info">Famous for its spectacular ring system, Saturn is a gas giant with an extensive system of moons, including Titan, the second-largest in the Solar System.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 1.4 billion km from Sun</li>
             <li><strong>Diameter:</strong> 116,460 km</li>
-            <li><strong>Day length:</strong> 10.7 hours</li>
+            <li><strong>Day Length:</strong> 10.7 hours</li>
+            <li><strong>Year Length:</strong> 29.46 Earth years</li>
           </ul>
         </div>
       </a>
 
       <!-- Uranus -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="uranas.jpg" alt="Uranus" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Uranus</h3>
-          <p class="planet-info">The "sideways planet" that rotates on its side with a unique blue-green color.</p>
+          <p class="planet-info">The ice giant Uranus has a unique sideways rotation and a pale blue color due to its hydrogen and helium atmosphere with methane.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 2.9 billion km from Sun</li>
             <li><strong>Diameter:</strong> 50,724 km</li>
-            <li><strong>Day length:</strong> 17.2 hours</li>
+            <li><strong>Day Length:</strong> 17.24 hours</li>
+            <li><strong>Year Length:</strong> 84 Earth years</li>
           </ul>
         </div>
       </a>
 
       <!-- Neptune -->
-      <a href="#planets" class="planet-card">
+      <a href="#" class="planet-card">
         <div class="planet-img-container">
           <img src="naptune.jpg" alt="Neptune" class="planet-img">
         </div>
         <div class="planet-content">
           <h3 class="planet-title">Neptune</h3>
-          <p class="planet-info">The windiest planet with the strongest winds in the Solar System reaching 2,100 km/h.
-          </p>
+          <p class="planet-info">The farthest known planet from the Sun, Neptune is a dark, cold world with supersonic winds and the Great Dark Spot, a storm similar to Jupiter's Great Red Spot.</p>
           <ul class="planet-stats">
-            <li><strong>Distance:</strong> 4.5 billion km from Sun</li>
             <li><strong>Diameter:</strong> 49,244 km</li>
-            <li><strong>Day length:</strong> 16.1 hours</li>
+            <li><strong>Day Length:</strong> 16.11 hours</li>
+            <li><strong>Year Length:</strong> 165 Earth years</li>
           </ul>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- Galaxies Section -->
   <section class="galaxies-section" id="galaxies">
     <div class="galaxies-container">
-      <h2 class="section-title">Fascinating Galaxies</h2>
+      <h2 class="section-title">Discover Distant Galaxies</h2>
       <div class="galaxies-grid">
         <!-- Milky Way -->
         <div class="galaxy-card">
@@ -1281,11 +220,11 @@
           </div>
           <div class="galaxy-content">
             <h3 class="galaxy-title">Milky Way</h3>
-            <p class="galaxy-description">Our home galaxy containing our solar system among billions of other stars.</p>
+            <p class="galaxy-description">Our home galaxy is a barred spiral galaxy containing our Solar System and billions of other stars, planets, and cosmic objects.</p>
             <ul class="galaxy-facts">
-              <li><strong>Type:</strong> Barred Spiral Galaxy</li>
-              <li><strong>Diameter:</strong> 100,000 light years</li>
-              <li><strong>Stars:</strong> 100-400 billion</li>
+              <li><strong>Type:</strong> Barred Spiral</li>
+              <li><strong>Diameter:</strong> 100,000 light-years</li>
+              <li><strong>Age:</strong> 13.6 billion years</li>
             </ul>
           </div>
         </div>
@@ -1297,12 +236,11 @@
           </div>
           <div class="galaxy-content">
             <h3 class="galaxy-title">Andromeda</h3>
-            <p class="galaxy-description">The closest major galaxy to the Milky Way and the largest in our Local Group.
-            </p>
+            <p class="galaxy-description">Andromeda is the nearest spiral galaxy to our Milky Way and is on a collision course with our galaxy, expected to merge in about 4.5 billion years.</p>
             <ul class="galaxy-facts">
-              <li><strong>Type:</strong> Spiral Galaxy</li>
-              <li><strong>Distance:</strong> 2.5 million light years</li>
-              <li><strong>Stars:</strong> 1 trillion</li>
+              <li><strong>Type:</strong> Spiral</li>
+              <li><strong>Distance:</strong> 2.537 million light-years</li>
+              <li><strong>Diameter:</strong> 220,000 light-years</li>
             </ul>
           </div>
         </div>
@@ -1314,204 +252,212 @@
           </div>
           <div class="galaxy-content">
             <h3 class="galaxy-title">Triangulum</h3>
-            <p class="galaxy-description">The third-largest member of the Local Group of galaxies.</p>
+            <p class="galaxy-description">The Triangulum Galaxy is the third-largest member of the Local Group of galaxies, which includes the Milky Way and Andromeda.</p>
             <ul class="galaxy-facts">
-              <li><strong>Type:</strong> Spiral Galaxy</li>
-              <li><strong>Distance:</strong> 2.7 million light years</li>
-              <li><strong>Diameter:</strong> 60,000 light years</li>
+              <li><strong>Type:</strong> Spiral</li>
+              <li><strong>Distance:</strong> 2.73 million light-years</li>
+              <li><strong>Diameter:</strong> 60,000 light-years</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    </div>
   </section>
-  <!-- 2. SPACE NEWS SECTION (Add this before fun facts section) -->
+
   <section class="space-news-section" id="news">
     <div class="space-news-container">
-      <h2 class="section-title">Space News</h2>
+      <h2 class="section-title">Latest Space News</h2>
       <div class="news-grid">
+        <!-- News Card 1 -->
         <div class="news-card">
           <div class="news-img-container">
-            <img src="news1.jpg" alt="Space News 1">
-            <div class="news-date">
-              <span class="day">26</span>
-              <span class="month">APR</span>
-            </div>
-          </div>
-          <div class="news-content">
-            <h3 class="news-title">New Exoplanet Discovered in Habitable Zone</h3>
-            <p class="news-excerpt">Scientists have found a potentially habitable exoplanet orbiting a nearby star
-              system just 40 light years away.</p>
-            <div class="news-meta">
-              <span><i class="fas fa-user"></i> Space Agency</span>
-              <span><i class="fas fa-comments"></i> 24</span>
-            </div>
-            <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-        <div class="news-card">
-          <div class="news-img-container">
-            <img src="news2.jpg" alt="Space News 2">
+            <img src="news1.jpg" alt="News 1">
             <div class="news-date">
               <span class="day">24</span>
               <span class="month">APR</span>
             </div>
           </div>
           <div class="news-content">
-            <h3 class="news-title">Mars Rover Discovers Ancient Lakebed</h3>
-            <p class="news-excerpt">The latest Mars rover has found evidence of what appears to be an ancient dried
-              lakebed, suggesting water once flowed freely.</p>
+            <h3 class="news-title">New Exoplanet Discovered in Habitable Zone</h3>
             <div class="news-meta">
-              <span><i class="fas fa-user"></i> Mars Exploration</span>
-              <span><i class="fas fa-comments"></i> 18</span>
+              <span><i class="fas fa-user"></i> Space Admin</span>
+              <span><i class="fas fa-comments"></i> 12 Comments</span>
             </div>
+            <p class="news-excerpt">Scientists have discovered a new Earth-like exoplanet orbiting within the habitable zone of its star, raising hopes for finding extraterrestrial life.</p>
             <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
+
+        <!-- News Card 2 -->
         <div class="news-card">
           <div class="news-img-container">
-            <img src="news3.png" alt="Space News 3">
+            <img src="news2.jpg" alt="News 2">
             <div class="news-date">
-              <span class="day">22</span>
+              <span class="day">20</span>
               <span class="month">APR</span>
             </div>
           </div>
           <div class="news-content">
-            <h3 class="news-title">Astronomers Capture Black Hole Image</h3>
-            <p class="news-excerpt">Using a global network of telescopes, astronomers have captured the most detailed
-              image yet of a supermassive black hole.</p>
+            <h3 class="news-title">Mars Rover Discovers Ancient Riverbed</h3>
             <div class="news-meta">
-              <span><i class="fas fa-user"></i> Astronomy Institute</span>
-              <span><i class="fas fa-comments"></i> 32</span>
+              <span><i class="fas fa-user"></i> Space Admin</span>
+              <span><i class="fas fa-comments"></i> 8 Comments</span>
             </div>
+            <p class="news-excerpt">Recent images from Mars Rover show evidence of what appears to be an ancient riverbed, suggesting water once flowed on the Red Planet's surface.</p>
+            <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- News Card 3 -->
+        <div class="news-card">
+          <div class="news-img-container">
+            <img src="news3.png" alt="News 3">
+            <div class="news-date">
+              <span class="day">15</span>
+              <span class="month">APR</span>
+            </div>
+          </div>
+          <div class="news-content">
+            <h3 class="news-title">First Images from James Webb Space Telescope</h3>
+            <div class="news-meta">
+              <span><i class="fas fa-user"></i> Space Admin</span>
+              <span><i class="fas fa-comments"></i> 15 Comments</span>
+            </div>
+            <p class="news-excerpt">NASA has released the first stunning images from the James Webb Space Telescope, revealing unprecedented details of distant galaxies and nebulae.</p>
             <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
+      <div class="news-more-container">
+        <a href="#" class="btn news-more-btn">View All News</a>
+      </div>
     </div>
   </section>
 
-  <!-- Space Facts Section -->
   <section class="space-facts-section" id="facts">
     <div class="space-facts-container">
-      <h2 class="section-title">Amazing Space Facts</h2>
+      <h2 class="section-title">Fascinating Space Facts</h2>
       <div class="facts-grid">
+        <!-- Fact 1 -->
         <div class="fact-card">
           <div class="fact-number">01</div>
           <h3 class="fact-title">Space is Completely Silent</h3>
-          <p class="fact-description">In space, there is no atmosphere or medium for sound waves to travel through,
-            making it completely silent regardless of all the violent, explosive events happening.</p>
+          <p class="fact-description">In space, there is no atmosphere or medium for sound waves to travel through. This means that space is completely silent, despite the cosmic events happening all around.</p>
         </div>
 
+        <!-- Fact 2 -->
         <div class="fact-card">
           <div class="fact-number">02</div>
-          <h3 class="fact-title">The Sun's Mass</h3>
-          <p class="fact-description">The Sun accounts for 99.86% of the mass in the solar system. The gas giants
-            Jupiter and Saturn account for most of the remaining 0.14%.</p>
+          <h3 class="fact-title">The Sun is Enormous</h3>
+          <p class="fact-description">The Sun accounts for 99.86% of the mass in our solar system. It would take about 1.3 million Earths to fill up the Sun if it were hollow.</p>
         </div>
 
+        <!-- Fact 3 -->
         <div class="fact-card">
           <div class="fact-number">03</div>
-          <h3 class="fact-title">Neutron Stars</h3>
-          <p class="fact-description">Neutron stars are so dense that a teaspoon of their material would weigh about a
-            billion tons on Earth.</p>
+          <h3 class="fact-title">One Day on Venus is Longer Than One Year</h3>
+          <p class="fact-description">Venus rotates so slowly that it takes 243 Earth days to complete one rotation. However, it only takes 225 Earth days to complete one orbit around the Sun.</p>
         </div>
 
+        <!-- Fact 4 -->
         <div class="fact-card">
           <div class="fact-number">04</div>
-          <h3 class="fact-title">Space Smells</h3>
-          <p class="fact-description">Astronauts report that space smells like hot metal, seared steak, and welding
-            fumes due to the presence of polyatomic chemical species.</p>
+          <h3 class="fact-title">There are More Stars Than Grains of Sand on Earth</h3>
+          <p class="fact-description">Astronomers estimate there are about 10 sextillion stars in the observable universe. That's more than all the grains of sand on all the beaches on Earth.</p>
         </div>
 
+        <!-- Fact 5 -->
         <div class="fact-card">
           <div class="fact-number">05</div>
-          <h3 class="fact-title">Venus Day</h3>
-          <p class="fact-description">A day on Venus (243 Earth days) is longer than a year on Venus (225 Earth days).
-          </p>
+          <h3 class="fact-title">Black Holes Distort Time</h3>
+          <p class="fact-description">Black holes have such strong gravity that they warp the fabric of space-time. Time passes more slowly near a black hole than it does farther away.</p>
         </div>
 
+        <!-- Fact 6 -->
         <div class="fact-card">
           <div class="fact-number">06</div>
-          <h3 class="fact-title">Black Holes</h3>
-          <p class="fact-description">Black holes aren't empty spaces but are actually the most dense objects in our
-            universe, with such strong gravity that nothing can escape them.</p>
+          <h3 class="fact-title">The Great Red Spot is Shrinking</h3>
+          <p class="fact-description">Jupiter's Great Red Spot, a giant storm that has been raging for at least 400 years, is gradually shrinking. It was once three times the size of Earth.</p>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section class="contact-section" id="contact">
-    <h2 class="contact-title">Contact Us</h2>
     <div class="contact-container">
+      <h2 class="contact-title">Contact Us</h2>
       <form class="contact-form">
         <div class="form-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="Enter your name">
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
         </div>
         <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
         </div>
         <div class="form-group">
           <label for="subject">Subject</label>
-          <input type="text" id="subject" placeholder="What's this about?">
+          <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell us what's on your mind..."></textarea>
+          <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
         </div>
         <button type="submit">Send Message</button>
       </form>
     </div>
   </section>
-  <!-- Footer -->
-  <footer class="solar-footer">
+
+  <footer>
     <div class="footer-container">
-      <div class="footer-section">
-        <h2>Solar Explorer</h2>
-        <p>Your journey through the cosmos begins here. Explore the wonders of our universe and discover the mysteries
-          of space.</p>
-      </div>
-
-      <div class="footer-section">
-        <h2>Quick Links</h2>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#planets">Planets</a></li>
-          <li><a href="#galaxies">Galaxies</a></li>
-          <li><a href="#facts">Space Facts</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h2>Contact Info</h2>
-        <ul>
-          <li><i class="fas fa-map-marker-alt"></i> head office....</li>
-          <li><i class="fas fa-phone"></i> (123) 456-7890</li>
-          <li><i class="fas fa-envelope"></i> info@solarexplorer.com</li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h2>Connect with Us</h2>
+      <div class="footer-about">
+        <div class="footer-logo">Solar Explorer</div><p>Solar Explorer is your gateway to the cosmos. We provide educational content about the solar system, galaxies, and the latest discoveries in astronomy. Join us on a journey through the stars!</p>
         <div class="social-icons">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
+      
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#planets"><i class="fas fa-chevron-right"></i> Planets</a></li>
+          <li><a href="#galaxies"><i class="fas fa-chevron-right"></i> Galaxies</a></li>
+          <li><a href="#news"><i class="fas fa-chevron-right"></i> Space News</a></li>
+          <li><a href="#facts"><i class="fas fa-chevron-right"></i> Fun Facts</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links">
+        <h3>Learn More</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Our Mission</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter">
+        <h3>Newsletter</h3>
+        <p>Subscribe to our newsletter to receive the latest updates and discoveries from space exploration.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+        <p>We respect your privacy. No spam, ever.</p>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Solar Explorer. All Rights Reserved.</p>
+    
+    <div class="copyright">
+      <p>&copy; 2025 Solar Explorer. All rights reserved. | Designed with <i class="fas fa-heart"></i> by <a href="#">Space Enthusiasts</a></p>
     </div>
   </footer>
-  <!-- Bootstrap and Custom JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
