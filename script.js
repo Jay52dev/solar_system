@@ -1,24 +1,50 @@
-// Generate random stars
-document.addEventListener('DOMContentLoaded', function () {
-  const starsContainer = document.querySelector('.stars');
-  const starCount = 200;
-
-  for (let i = 0; i < starCount; i++) {
-    const star = document.createElement('div');
-    star.classList.add('star');
-
-    // Random position
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-
-    // Random size
-    const size = Math.random() * 3;
-    star.style.width = `${size}px`;
-    star.style.height = `${size}px`;
-
-    // Random twinkle animation delay
-    star.style.animationDelay = `${Math.random() * 5}s`;
-
-    starsContainer.appendChild(star);
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+  
+  // Close menu when clicking a link
+  const links = navLinks.getElementsByTagName('a');
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', () => {
+      navLinks.classList.remove('show');
+    });
   }
-});
+  
+  // Animate planets
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animation speeds for planets (in seconds)
+    const speeds = {
+      mercury: 10,
+      venus: 15,
+      earth: 20,
+      mars: 25,
+      jupiter: 35,
+      saturn: 45,
+      uranus: 60,
+      neptune: 75
+    };
+    
+    // Set animation durations
+    for (const planet in speeds) {
+      const elem = document.getElementById(planet);
+      if (elem) {
+        elem.style.animationDuration = `${speeds[planet]}s`;
+      }
+    }
+    
+    // Interactive planet info
+    const planetCards = document.querySelectorAll('.planet-card');
+    planetCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('active');
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('active');
+      });
+    });
+  });
